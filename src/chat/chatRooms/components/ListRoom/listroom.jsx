@@ -3,8 +3,7 @@ import classNames from 'classnames/bind'
 import styles from "./lsr.module.scss"
 import ROOMS from './rm'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
-import chatSlice from '../../../../redux/slice/chatSlice'
+
 
 const cx = classNames.bind(styles)
 

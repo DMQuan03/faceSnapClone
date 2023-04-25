@@ -16,14 +16,24 @@ import { NavLink, useNavigate } from 'react-router-dom'
 const cx = classNames.bind(styles)
 const NAVBARFACEBOOK = ({data}) => {
     const navigate = useNavigate()
+    const {userId} = sessionStorage
    
   return (
     <div className={cx("Wrapper")}>
         <div className={cx("navbar_fb")}>
-            <div className={cx("info_user")}>
+            <div 
+            onClick={() => {
+                navigate("/profile/" + userId)
+            }}
+            className={cx("info_user")}>
                 <img className={cx("img_user")} src={data?.avatar || ""} alt='a' />
                 <div className={cx("username_info")}>
-                    <p>{data?.fullName || "user"}</p>
+                    <p style={
+                        {
+                            fontWeight : 700,
+                            fontSize : "1.2rem"
+                        }
+                    }>{data?.fullName || "user"}</p>
                 </div>
             </div>
             <div className={cx("nav_item1")}>
@@ -35,7 +45,11 @@ const NAVBARFACEBOOK = ({data}) => {
                     <FaUserFriends className={cx("icon")} />
                 </div>
                 <div className={cx("title_nav_item1")}>
-                    <p>ban be</p>
+                    <p style={
+                        {
+                            fontWeight : 700
+                        }
+                    }>ban be</p>
                 </div>
             </div>
             <div 
@@ -47,7 +61,11 @@ const NAVBARFACEBOOK = ({data}) => {
                     <BsShopWindow className={cx("icon")} />
                 </div>
                 <div className={cx("title_nav_item2")}>
-                    <p>MarketPlace</p>
+                    <p style={
+                        {
+                            fontWeight : 700
+                        }
+                    }>MarketPlace</p>
                 </div>
             </div>
             <div 
@@ -59,7 +77,11 @@ const NAVBARFACEBOOK = ({data}) => {
                     <BsDisplay className={cx("icon")} />
                 </div>
                 <div className={cx("title_nav_item3")}>
-                    <p>Watch</p>
+                    <p style={
+                        {
+                            fontWeight : 700
+                        }
+                    }>Watch</p>
                 </div>
             </div>
             <div className={cx("nav_item3")}>

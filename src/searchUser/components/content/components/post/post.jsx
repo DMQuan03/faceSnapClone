@@ -29,7 +29,7 @@ import POPPER from '../../../../../components/Popper'
 
 const {token } = sessionStorage
 
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }
@@ -231,14 +231,22 @@ const POSTSEARCH = ({data}) => {
                     marginRight : 20
                 }}>{data?.title || ""}</p>
             </main>
-            {data?.img && <div className={cx("img_post")}>
-                    <img style={
+            {data?.img && <div  className={cx("img_post")}>
+                    <img  style={
                         {
                             width : "100%",
                             height : "100%",
-                            maxHeight : 700
+                            maxHeight : 700,
+                            cursor : "pointer"
                         }
-                    } src={data?.img || 'https://s.yimg.com/fz/api/res/1.2/of4O3I3Im0hNqpzcNoC_Xw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpbGw7aD0xOTI7cHhvZmY9MDtweW9mZj0wO3E9ODA7dz0xOTI-/https://s.yimg.com/zb/imgv1/29a03124-da69-34b2-9bcb-cafb923ea6a8/s_140x140'} />
+                    }  src={data?.img || 'https://s.yimg.com/fz/api/res/1.2/of4O3I3Im0hNqpzcNoC_Xw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpbGw7aD0xOTI7cHhvZmY9MDtweW9mZj0wO3E9ODA7dz0xOTI-/https://s.yimg.com/zb/imgv1/29a03124-da69-34b2-9bcb-cafb923ea6a8/s_140x140'}
+                    onClick={() => {
+                        socket.emit("join_room", {id : data._id})
+                        socket.emit("getCMT", {idBlog : data._id})
+                        dispatch(blogSlice.actions.showMore())
+                        dispatch(blogSlice.actions.infoOnlyPost(data))
+                    }}
+                     />
             </div>}
             <div className={cx("show_cmt_like")}>
                     <div className={cx("like_tym")}>
@@ -306,6 +314,7 @@ const POSTSEARCH = ({data}) => {
                             rotate : "90deg",
                             marginRight : 10,
                             marginTop : 0,
+                            cursor : "pointer"
                         }
                     } /></p>
                     <p style={
@@ -339,7 +348,8 @@ const POSTSEARCH = ({data}) => {
                             rotate : "90deg",
                             marginRight : 10,
                             marginTop : 0,
-                            color : "blue"
+                            color : "blue",
+                            cursor : "pointer"
                         }
                     } /></p>
                     <p style={
@@ -372,7 +382,8 @@ const POSTSEARCH = ({data}) => {
                             rotate : "90deg",
                             marginRight : 10,
                             marginTop : 0,
-                            color : "blue"
+                            color : "blue",
+                            cursor : 'pointer'
                         }
                     } /></p>
                     <p style={
@@ -403,7 +414,8 @@ const POSTSEARCH = ({data}) => {
                             height : 20,
                             rotate : "90deg",
                             marginRight : 10,
-                            marginTop : 0
+                            marginTop : 0,
+                            cursor : 'pointer'
                         }
                     } /></p>
                     <p style={
@@ -437,7 +449,8 @@ const POSTSEARCH = ({data}) => {
                             height : 15,
                             rotate : "90deg",
                             marginRight : 10,
-                            marginTop : 8
+                            marginTop : 8,
+                            cursor : "pointer"
                         }
                     } /></p>
                     <p style={
@@ -469,7 +482,8 @@ const POSTSEARCH = ({data}) => {
                             height : 20,
                             rotate : "90deg",
                             marginRight : 10,
-                            marginTop : 6
+                            marginTop : 6,
+                            cursor : 'pointer'
                         }
                     }  /></p>
                     <p style={
@@ -499,7 +513,8 @@ const POSTSEARCH = ({data}) => {
                             rotate : "90deg",
                             marginRight : 10,
                             marginTop : 6,
-                            color : "blue"
+                            color : "blue",
+                            cursor : "pointer"
                         }
                     }  /></p>
                     <p style={
@@ -532,7 +547,8 @@ const POSTSEARCH = ({data}) => {
                             rotate : "90deg",
                             marginRight : 10,
                             marginTop : 6,
-                            color : "blue"
+                            color : "blue",
+                            cursor : "pointer"
                         }
                     }  /></p>
                     <p style={
@@ -561,7 +577,8 @@ const POSTSEARCH = ({data}) => {
                             height : 20,
                             rotate : "90deg",
                             marginRight : 10,
-                            marginTop : 6
+                            marginTop : 6,
+                            cursor : "pointer"
                         }
                     }  /></p>
                     <p style={

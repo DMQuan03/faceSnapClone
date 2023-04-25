@@ -24,7 +24,7 @@ import LISTCOMMENT from '../../../../../../chat/components/listcomment'
 import { io } from 'socket.io-client'
 
 const {token} = sessionStorage
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }

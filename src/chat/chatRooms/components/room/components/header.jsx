@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
 import chatSlice from '../../../../../redux/slice/chatSlice'
 import axios from 'axios'
-import LISTCOMMENT from '../../../../components/listcomment'
 import { Col } from 'antd'
 const {token} = sessionStorage
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }

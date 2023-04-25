@@ -29,7 +29,7 @@ import VIDEOSHOW from '../chat/video'
 import {io} from "socket.io-client"
 const { token } = sessionStorage
 
-var socket = io.connect("http://localhost:3456", {
+var socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token : token
     }

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import blogSlice from '../../../../../redux/slice/blogSlice'
 import { io } from 'socket.io-client'
 const {token} = sessionStorage
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }
@@ -170,6 +170,20 @@ const CREATEPOST = () => {
                         marginRight : 20
                     }
                 }>clear img</button>
+            </div>
+            <div style={
+                {
+                    width : '100%',
+                    height : 60,
+                    backgroundColor : "red",
+                    position : "relative",
+                    display : 'flex',
+                    justifyContent : 'flex-start',
+                    alignItems : "center",
+                    textAlign : "center"
+                }
+            }>
+
             </div>
             <div style={
                 {

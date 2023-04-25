@@ -6,7 +6,7 @@ import { format } from "timeago.js"
 import { RiChatDeleteLine } from "react-icons/ri"
 
 const {token} = sessionStorage
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }

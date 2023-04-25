@@ -42,6 +42,7 @@ const LOGIN = () => {
       }
     })
     .then(res => {
+      console.log(res);
       sessionStorage.setItem("token", res.data.data.accessToken)
       sessionStorage.setItem("avatar", res.data.data.avatar)
       sessionStorage.setItem("username", res.data.data.fullName)

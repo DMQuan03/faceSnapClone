@@ -6,7 +6,7 @@ import { io } from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
 import chatSlice from '../../../../redux/slice/chatSlice'
 const {token} = sessionStorage
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import chatSlice from '../../../../../redux/slice/chatSlice'
 import { io } from 'socket.io-client'
 const {token} = sessionStorage
-const socket = io.connect("http://localhost:3456", {
+const socket = io.connect(process.env.REACT_APP_SOCKET, {
     query : {
         token
     }
