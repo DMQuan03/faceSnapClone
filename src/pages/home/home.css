@@ -1,0 +1,257 @@
+.wrapper888 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2f363e;
+}
+
+.earth {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.earthImg {
+}
+#time {
+    display: flex;
+    gap: 30px;
+}
+
+#time .circle1 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(0deg);
+
+}
+
+#time 
+.circle,
+.circle1,
+.circle2,
+.circle3,
+svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform: rotate(270deg);
+}
+
+#time .circle1 svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 8;
+    stroke: #282828 ;
+    transform: translate(5px ,5px);
+}
+
+#time .circle1 svg circle:nth-last-child(1) {
+    stroke-dasharray: 440 ;
+    stroke: #ff2972 ;
+    stroke-dashoffset: 440;
+
+}
+
+#time .circle2 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(0deg);
+}
+
+
+
+#time .circle2 svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 8;
+    stroke: #282828 ;
+    transform: translate(5px ,5px);
+}
+
+#time .circle2 svg circle:nth-last-child(1) {
+    stroke-dasharray: 440 ;
+    stroke: #ffe800 ;
+    stroke-dashoffset: 440;
+
+}
+
+#time .circle3 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(0deg);
+
+}
+
+
+
+#time .circle3 svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 8;
+    stroke: #282828 ;
+    transform: translate(5px ,5px);
+}
+
+#time .circle3 svg circle:nth-last-child(1) {
+    stroke-dasharray: 440 ;
+    stroke: #04f343 ;
+    stroke-dashoffset: 440;
+}
+
+#time .circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(0deg);
+
+}
+
+
+
+#time .circle svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 8;
+    stroke: #282828 ;
+    transform: translate(5px ,5px);
+}
+
+#time .circle svg circle:nth-last-child(1) {
+    stroke-dasharray: 440 ;
+    stroke: #e47908 ;
+    stroke-dashoffset: 440;
+
+}
+
+#time div {
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+    color: rgb(230, 224, 213);
+}
+#time div span {
+    position: absolute;
+    transform: translateX(-50%) translateY(10px);
+    font-size: 0.95em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+#time .dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 1000;
+}
+
+#time .dots::before {
+    content: "";
+    position: relative;
+    top: -3px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #f0e0d9;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #04f343;
+}
+
+.newYear {
+    font-size: 8em;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    line-height: 0.6em;
+    display: none;
+}
+
+.newYear span {
+    font-size: 0.5em;
+    font-weight: 300;
+}
+
+.navbar {
+    position: absolute;
+    top: 10px;
+    display: flex;
+    justify-content: space-around;
+    right: 10px;
+    font-size: 1.6rem;
+    overflow: hidden;
+}
+
+.btn_nav {
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #171212;
+    color: wheat;
+}
+
+.btn_nav:hover {
+    opacity: .5;
+    cursor: pointer;
+    border: 1px solid #cf1313;
+    
+}
+
+.one {
+    animation: inBackground 1s ease both;
+}
+.two {
+    animation: inBackground 2s ease both;
+}
+.three {
+    animation: inBackground 3s ease both;
+}
+.four {
+    animation: inBackground 4s ease both;
+}
+.five {
+    animation: inBackground 4.5s ease both;
+}
+.six {
+    animation: inBackground 5s ease both;
+}
+
+@keyframes inBackground {
+   from {
+    transform: translateX(500px);
+   }to {
+    transform: translateX(0);
+   }
+}
+
+

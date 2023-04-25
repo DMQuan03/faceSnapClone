@@ -1,0 +1,52 @@
+.wrapper {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    width: 20%;
+    background-color: #ffffff;
+    padding: 10px;
+    box-sizing: border-box;
+    border-right: 1px solid #dad6d6;
+
+    .header_navbar_friends {
+        width: 100%;
+        height: 40px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+
+        .btn_header_nav_friends {
+            &:hover {
+                background-color: rgb(208, 213, 216);
+                cursor: pointer;
+            }
+        }
+    }
+    .container_item {
+        width: 100%;
+        height: 60px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        &:hover {
+            background-color: aliceblue;
+        }
+    }
+}
+
+.icon_friends {
+    width: 20px;
+    height: 20px;
+    rotate: 90deg;
+}
+
+.icon_navbar_1 {
+    width: 25px;
+    height: 25px;
+    rotate: 90deg;
+}

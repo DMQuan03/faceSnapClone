@@ -1,0 +1,68 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+ 
+    .NAVALL_people {
+        margin-top: 60px;
+        width: 50%;
+        height: auto;
+        min-height: 200px;
+        background-color: rgb(255, 255, 255);
+        position: relative;
+        margin-left: 350px;
+        border-radius: 10px;
+        border: 1px solid #cfcccc;
+        overflow: hidden;
+
+        .NAVALL_people_title {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            height: 50px;
+            position: relative;
+            width: 100%;
+        }
+        .btn_see_more {
+            width: 90%;
+            border: none;
+            height: 50px;
+            background-color: #e0dede;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: .9;
+            }
+        }
+    }
+
+    .NAVALL_post {
+        margin-top: 60px;
+        width: 50%;
+        height: auto;
+        min-height: 200px;
+        margin-left: 350px;
+        margin-bottom: 100px;
+    }
+
+    .NAV_VIDEO {
+        margin-top: 60px;
+        width: 70%;
+        height: auto;
+        min-height: 200px;
+        background-color: rgb(255, 255, 255);
+        position: relative;
+        margin-left: 250px;
+        border-radius: 10px;
+        overflow: hidden;
+        
+    }
+   
+}

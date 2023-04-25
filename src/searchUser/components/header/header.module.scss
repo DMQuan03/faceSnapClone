@@ -1,0 +1,97 @@
+.wrapper {
+    position: fixed;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd8d8;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    z-index: 10000;
+
+    .navbar_header {
+        display: flex;
+        width: 600px;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+            .icon {
+                width: 30px;
+                height: 30px;
+                rotate: 90deg;
+                margin-left: 20px;
+                margin-right: 20px;
+                color: black;
+            }
+    }
+    .search_user_header {
+        width: 530px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .styles_input {
+            height: 30px;
+            outline: none;
+            border: none;
+            margin-left: 20px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            cursor: grab;
+        }
+
+        .styles_button {
+            height: 32px;
+            border: none;
+            border-left: 1px solid #333;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+
+    .info_user {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        text-align: center;
+        margin-right: 20px;
+        width: 530px;
+        .infoUser {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            border-radius: 50%;
+            border: 1px solid #333;
+        }
+
+        .btn_logout {
+            border: none;
+            border: 1px solid #0ea5e1;
+            border-radius: 20px;
+
+            &:hover {
+                box-shadow: 1px 1px 5px 2px #0ea5e1;
+                color: rgb(232, 26, 8);
+            }
+        }
+    }
+}
+
+.nav_item1_header {
+    height: 50px;
+    border-radius: 10px;
+    &:hover {
+        opacity: .9;
+        background-color: rgb(245, 239, 239);
+    }
+}
+

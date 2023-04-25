@@ -1,0 +1,284 @@
+
+// navbar facebook
+.Wrapper {
+    position: fixed;
+    left: 0;
+    width: 20%;
+    bottom: 0;
+    background-color: #f0f2f5;
+    border-top: 1px solid #b0a8a8;
+    top: 60px;
+    overflow: auto;
+    padding: 10px;
+    box-sizing: border-box;
+
+    .navbar_fb {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        margin-bottom: 5px;
+        position: relative;
+        border-bottom: 1px solid #d3cece;
+
+        .info_user {
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            height: 60px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            .img_user {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                position: absolute;
+                left: 10px;
+            }
+            .username_info {
+                width: 252px;
+                max-width: 252px;
+                position: absolute;
+                left: 65px;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                text-align: start;
+                overflow: hidden;
+
+            }
+
+            &:hover {
+                opacity: .9;
+                background-color: aliceblue;
+            }
+        }
+        .nav_item1 {
+            cursor: pointer;
+            width: 100%;
+            height: 60px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+
+            .nav_item1_icon {
+                position: absolute;
+                left: 10px;
+
+            }
+
+            .title_nav_item1 {
+                width: 252px;
+                max-width: 252px;
+                position: absolute;
+                left: 65px;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                text-align: start;
+                overflow: hidden;
+            }
+            &:hover {
+                opacity: .9;
+                background-color: aliceblue;
+            }
+        }
+
+        .nav_item2 {
+            cursor: pointer;
+            width: 100%;
+            height: 60px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+
+            .nav_item2_icon {
+                position: absolute;
+                left: 10px;
+
+            }
+
+            .title_nav_item2 {
+                width: 252px;
+                max-width: 252px;
+                position: absolute;
+                left: 65px;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                text-align: start;
+                overflow: hidden;
+            }
+            &:hover {
+                opacity: .9;
+                background-color: aliceblue;
+            }
+        }
+
+        .nav_item3 {
+            cursor: pointer;
+            width: 100%;
+            height: 60px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+
+            .nav_item3_icon {
+                position: absolute;
+                left: 10px;
+
+            }
+
+            .title_nav_item3 {
+                width: 252px;
+                max-width: 252px;
+                position: absolute;
+                left: 65px;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                text-align: start;
+                overflow: hidden;
+            }
+            &:hover {
+                opacity: .9;
+                background-color: aliceblue;
+            }
+        }
+    }
+
+    .navbar_fb2 {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+        position: relative;
+        .title_nav_fb2 {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .nav_item_fb2 {
+            cursor: pointer;
+            width: 100%;
+            height: 60px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+
+            .nav_item_icon_fb2 {
+                position: absolute;
+                left: 10px;
+
+            }
+
+            .nav_item_title_fb2 {
+                width: 252px;
+                max-width: 252px;
+                position: absolute;
+                left: 65px;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                text-align: start;
+                overflow: hidden;
+            }
+            &:hover {
+                opacity: .9;
+                background-color: aliceblue;
+            }
+        }
+    }
+}
+
+
+.icon {
+    width: 30px;
+    height: 30px;
+    rotate: 90deg;
+    margin-left: 2px;
+    color: rgb(13, 40, 212);
+}
+
+// navList facebook
+.Wrapper_lsFr {
+    position: fixed;
+    right: 0;
+    width: 20%;
+    bottom: 0;
+    background-color: #f0f2f5;
+    border-top: 1px solid #b0a8a8;
+    overflow: auto;
+    padding: 12px;
+    box-sizing: border-box;
+    top: 60px;
+    .lsFr_birthDay {
+        width: 100%;
+        height: auto;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        border-bottom: 1px solid #ddd6d6;
+        .nav_item1_fb2 {
+            &:hover {
+                opacity: .9;
+                background-color: aliceblue;
+            }
+        }
+
+    }
+    .list_user_nav_fb2 {
+        height: auto;
+        width: 100%;
+        border-bottom: 1px solid #dbd4d4;
+        .title_list_user {
+            width: 100%;
+            height: 40px;
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+    }
+    .title_group_chat {
+        width: 100%;
+        height: auto;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+            
+    }
+    
+}
+
+
+
+

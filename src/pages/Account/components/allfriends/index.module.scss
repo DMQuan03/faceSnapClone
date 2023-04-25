@@ -1,0 +1,21 @@
+.wrapper {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    width: 20%;
+    background-color: #fff;
+    border-right: 1px solid #d2cccc;
+    padding: 10px;
+    box-sizing: border-box;
+    .header_all_friends {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        height: 70px;
+        width: 100%;
+        background-color: #fff;
+        position: relative;
+    }
+}

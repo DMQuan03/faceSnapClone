@@ -1,0 +1,16 @@
+.select_nav {
+    width:  99.7%;
+    height: 40px;
+    background-color: #383c3e;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: wheat;
+    border-right: 1px solid #fff;
+    position: relative;
+    .icons_nav_chat {
+        rotate: 90deg;
+        width: 30px;
+        height: 30px;
+    }
+}

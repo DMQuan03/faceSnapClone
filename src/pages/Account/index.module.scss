@@ -1,0 +1,29 @@
+.wrapper_friends {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    right: 0;
+    width: 80%;
+    margin-left: 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: auto;
+
+    .content_friends {
+        height: auto;
+        min-height: 761px;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 20px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        overflow: hidden;
+        
+    }
+}

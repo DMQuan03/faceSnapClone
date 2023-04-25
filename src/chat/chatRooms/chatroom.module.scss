@@ -1,0 +1,26 @@
+.CHAT_wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    .CHAT_navbar {
+        flex: 2;
+        top: 0;
+        left: 0;
+        width: 20%;
+        bottom: 0;
+        position: absolute;
+        background-color: antiquewhite;
+    }
+    .CHAT_info {
+        flex: 8;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        width: 80%;
+        position: absolute;
+        background-color: red;
+    }
+}

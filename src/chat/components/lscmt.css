@@ -1,0 +1,10 @@
+.wrapper_lscmt {
+    height: auto;
+    min-height: 100px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    position: relative;
+    margin-right: 400px;
+    width: 100%;
+}
+

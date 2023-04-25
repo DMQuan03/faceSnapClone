@@ -1,0 +1,101 @@
+.wrapper {
+    width: 900px;
+    height: 400px;
+    margin-top: 20px;
+    position: relative;
+    height: auto;
+    margin-top: 20px;
+    border: 1px solid #dbd7d7;
+    border-radius: 10px;
+
+    .header_video {
+        width: 100%;
+        height: 60px;
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+
+        .img_user_page {
+            left: 20px;
+            width: 50px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        .full_name_page_user {
+            width: 300px;
+            text-align: start;
+            margin-left: 20px;
+        }
+    }
+    .title_video {
+        width:  100%;
+        height: auto;
+        min-height: 40px;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .video_true {
+        width: 100%;
+        height: 500px;
+        background-color: gray;
+    }
+
+    .show_like {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+
+        .like_share {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        .number_cmt_view_like {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
+}
+
+.wrapper_icon {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+
+    &:hover {
+        background-color: #f5efef;
+    }
+}
+
+.icon_video {
+    width: 20px;
+    height: 20px;
+    rotate: 90deg;
+    color: rgb(102, 99, 99);
+}

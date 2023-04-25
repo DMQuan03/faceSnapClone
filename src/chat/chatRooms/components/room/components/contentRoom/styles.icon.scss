@@ -1,0 +1,59 @@
+.incon_style {
+    width: 400px;
+    border: none;
+    outline: none;
+    border-bottom: 2px #fff solid;
+    background: transparent;
+    color: antiquewhite;
+    backdrop-filter: blur(2px);
+    &:hover {
+        animation: stylesIcons .8s ease both;
+    }
+    &:focus {
+        animation: stylesIcons .8s ease both;
+    }
+    &:hover~label {
+        display: block;
+        animation: labelSt .8s ease both;
+    }
+    &:focus~label {
+        display: block;
+        animation: labelSt .8s ease both;
+    }
+   
+}
+
+.labelStyles {
+    position: absolute;
+    display: none;
+    outline: none;
+    color: aliceblue;
+    margin-left: -200px;
+}
+
+@keyframes stylesIcons {
+    from {
+        display: block;
+        width: 400px;
+        
+    }to {
+        width: 600px;
+    }
+}
+
+@keyframes labelSt {
+    to {
+        margin-left: -500px;
+        margin-top: -40px;
+    }
+}
+
+.scr_bt1 {
+    height: 90%;
+}
+
+.styles_bgr_size {
+    background-size: 100% 100%;
+}
+
+

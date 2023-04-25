@@ -1,0 +1,35 @@
+.wrapper {
+    width: 100%;
+    height: 50px;
+    margin-left: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: aliceblue;
+        opacity: .9;
+    }
+
+    .img_user {
+        width : 40px;
+        height : 40px;
+        border-radius : 50%;
+        position : absolute;
+        left : 10px;
+    }
+
+    .username_friends {
+        width: 252px;
+        height: 100%;
+        position: absolute;
+        left: 60px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+    }
+}

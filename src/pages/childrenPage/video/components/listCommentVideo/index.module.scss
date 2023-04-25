@@ -1,0 +1,23 @@
+.wrapper {
+    width: 100%;
+    height: auto;
+    min-height: 70px;
+    margin-top: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .info_comment {
+        width: 80%;
+        max-width: 75%;
+        height: auto;
+        min-height: 40px;
+        margin-left: 20px;
+        height: 100%;
+        position: relative;
+        margin-top: 14px;
+        border-radius: 20px;
+    }
+}

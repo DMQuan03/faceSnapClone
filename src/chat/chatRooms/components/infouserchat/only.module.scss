@@ -1,0 +1,14 @@
+.btn-header-info888 {
+    outline: none;
+    border: none;
+    color: white;
+    backdrop-filter: blur(2px);
+    background: transparent;
+    border: 1px solid #18cadd;
+    border-radius: 20px;
+
+    &:hover {
+        box-shadow: 1px 1px 10px 3px #18cadd;
+        color: rgb(162, 251, 9);
+    }
+}
