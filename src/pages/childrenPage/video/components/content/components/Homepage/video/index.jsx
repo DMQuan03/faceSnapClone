@@ -28,7 +28,7 @@ const VIDEOHOMEPAGE = ({data}) => {
     const handleLike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API13 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/video/likevideo/" + data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -43,7 +43,7 @@ const VIDEOHOMEPAGE = ({data}) => {
       const handleDislike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API12 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/video/dislikevideo/" + data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }

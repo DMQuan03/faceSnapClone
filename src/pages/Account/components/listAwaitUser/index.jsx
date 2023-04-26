@@ -19,7 +19,7 @@ const LISTAWAIT = ({data}) => {
     const noAdd = () => {
         axios({
             method : "put",
-            url : process.env.REACT_APP_API5+ data._id,
+            url : process.env.REACT_APP_BASE_URL + "/user/noaddfriend/" + data._id,
             headers : {
                 authorization : `Bearer ${token}`
             }

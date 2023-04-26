@@ -62,7 +62,7 @@ const VIDEO = ({data}) => {
     const handleLike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API13 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/video/likevideo/" + data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -78,7 +78,7 @@ const VIDEO = ({data}) => {
       const handleDislike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API12 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/video/dislikevideo/" + data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -99,7 +99,7 @@ const VIDEO = ({data}) => {
     const handleDeleteVideo = () => {
       axios({
         method : "delete",
-        url : process.env.REACT_APP_API22 + data._id,
+        url : process.env.REACT_APP_BASE_URL + "/video/deletevideo/" + data._id,
         headers : {
           Authorization : `Bearer ${token}`
         }
@@ -116,7 +116,7 @@ const VIDEO = ({data}) => {
     const handleEditVideo = () => {
       axios({
         method : "patch",
-        url : process.env.REACT_APP_API23 + data._id,
+        url : process.env.REACT_APP_BASE_URL + "/video/editvideo/" + data._id,
         data : {
           title : titleEdit,
           video : VideoEdit

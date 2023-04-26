@@ -47,7 +47,7 @@ const CREATEPOST = () => {
         socket.on("return_blog", (data) => {
                 if (temp._id !== data._id) {
                     dispatch(blogSlice.actions.createPost(data))
-                    dispatch(blogSlice.actions.setTemp())
+                    dispatch(blogSlice.actions.setTemp(data))
                     return 1
                 }else {
                     return 0

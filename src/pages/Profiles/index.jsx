@@ -70,7 +70,7 @@ const Profils = () => {
     const handleFollowUser = () => {
         axios({
             method : "put",
-            url : process.env.REACT_APP_API16 + params.id,
+            url : process.env.REACT_APP_BASE_URL + "/user/following/" + params.id,
             headers : {
                 authorization : `Bearer ${token}`
             }
@@ -83,7 +83,7 @@ const Profils = () => {
     const unfollowing = () => {
         axios({
             method : "put",
-            url : process.env.REACT_APP_API17 + params.id,
+            url : process.env.REACT_APP_BASE_URL + "/user/unfollowing/" + params.id,
             headers : {
                 authorization : `Bearer ${token}`
             }
@@ -111,7 +111,7 @@ const Profils = () => {
     useEffect(() => {
         axios({
             method : "get",
-            url : process.env.REACT_APP_API18 + params.id,
+            url : process.env.REACT_APP_BASE_URL + "/user/onlyuser/" + params.id,
             headers : {
                 authorization : `Bearer ${token}`
             }
@@ -126,7 +126,7 @@ const Profils = () => {
     useEffect(() => {
         axios({
             method : "get",
-            url : process.env.REACT_APP_API19 + params.id,
+            url : process.env.REACT_APP_BASE_URL + "/blog/getblogofuser/" + params.id,
             headers : {
                 authorization : `Bearer ${token}`
             }
@@ -139,7 +139,7 @@ const Profils = () => {
     useEffect(() => {
         axios({
             method : "get",
-            url : process.env.REACT_APP_API2,
+            url : process.env.REACT_APP_BASE_URL + "/user/currentuser/",
             headers : {
                 authorization : `Bearer ${token}`
             }
@@ -162,7 +162,7 @@ const Profils = () => {
     const handleRemoveAddfr = () => {
         axios({
             method : "put",
-            url : process.env.REACT_APP_API20 + infoUser._id,
+            url : process.env.REACT_APP_BASE_URL + "/user/unaddfriend/" + infoUser._id,
             headers : {
                 authorization : `Bearer ${token}`
             }
@@ -204,7 +204,7 @@ const Profils = () => {
     const handleUnFriend = () => {
         axios({
             method : "put",
-            url :process.env.REACT_APP_API21 +  infoUser._id,
+            url :process.env.REACT_APP_BASE_URL + "/user/unfriend/" +  infoUser._id,
             headers : {
                 authorization : `Bearer ${token}`
             }

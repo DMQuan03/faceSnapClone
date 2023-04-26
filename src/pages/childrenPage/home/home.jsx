@@ -39,7 +39,7 @@ const HOME = () => {
             
     axios({
         method : "get",
-        url : process.env.REACT_APP_API2,
+        url : process.env.REACT_APP_BASE_URL + "/user/currentuser/",
         headers : {
             authorization : `Bearer ${token}`
         }
@@ -59,7 +59,7 @@ const HOME = () => {
 
     axios({
         method : "get",
-        url : process.env.REACT_APP_GETALL_BLOG + "?limit=" + limit,
+        url : process.env.REACT_APP_BASE_URL + "/blog/" + "?limit=" + limit,
         headers : {
             authorization : `Bearer ${token}`
         }

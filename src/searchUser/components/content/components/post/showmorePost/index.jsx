@@ -92,7 +92,7 @@ const SHOWMORE = () => {
     const handleLike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API11 + infoPost._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/like/"  + infoPost._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -108,7 +108,7 @@ const SHOWMORE = () => {
       const handleDislike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API10 + infoPost._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/dislike/"  + infoPost._id,
           headers : {
             Authorization : `Bearer ${token}`
           }

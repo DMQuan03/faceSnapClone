@@ -68,7 +68,7 @@ const POSTSEARCH = ({data}) => {
             onClick : () => {
                 axios({
                     method : "delete",
-                    url : process.env.REACT_APP_API7 + data._id,
+                    url : process.env.REACT_APP_BASE_URL + "/blog/deleteblog/" +  data._id,
                     headers : {
                       authorization : `Bearer ${token}`
                     }
@@ -88,7 +88,7 @@ const POSTSEARCH = ({data}) => {
     const handleLike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API11 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/like/" +  data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -104,7 +104,7 @@ const POSTSEARCH = ({data}) => {
       const handleDislike = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API10 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/dislike/" + data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -120,7 +120,7 @@ const POSTSEARCH = ({data}) => {
       const handleShare = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API9 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/share/" +  data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -137,7 +137,7 @@ const POSTSEARCH = ({data}) => {
       const handleUnshare = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_API8 + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/unshare/" + data._id,
           headers : {
             Authorization : `Bearer ${token}`
           }

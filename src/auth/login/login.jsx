@@ -9,6 +9,7 @@ import leaf_03 from "../../picture/leaf_03.png"
 import leaf_04 from "../../picture/leaf_04.png"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+
 const LOGIN = () => {
 
   // thu vien
@@ -35,7 +36,7 @@ const LOGIN = () => {
   const handleSubmitLogin = () => {
     axios({
       method: "POST",
-      url : process.env.REACT_APP_API3,
+      url : process.env.REACT_APP_BASE_URL + "/user/login",
       data : {
         email : textEmailLogin,
         password : textPasswordLogin
@@ -70,7 +71,7 @@ const LOGIN = () => {
     try {
       const res = await axios({
         method : "POST",
-        url : process.env.REACT_APP_API4,
+        url : process.env.REACT_APP_BASE_URL + "/user/register",
         data : {
           email : textEmailRegister,
           password : textPasswordRegister,
@@ -85,7 +86,7 @@ const LOGIN = () => {
       }
       
     } catch (error) {
-      throw new Error(error.message)
+      console.log(error.message)
     }
   }
 

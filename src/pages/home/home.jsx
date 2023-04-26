@@ -13,7 +13,7 @@ const HOME = () => {
     useEffect(() => {
         axios({
             method : "get",
-            url : process.env.REACT_APP_API2,
+            url : process.env.REACT_APP_BASE_URL + "/user/currentuser/",
             headers : {
                 authorization : `Bearer ${token}`
             }

@@ -97,7 +97,7 @@ const HEADERROOM = ({data}) => {
    useEffect(() => {
     axios({
       method : "get",
-      url : process.env.REACT_APP_API24 + searchUserTrue + "&limit=" + limits,
+      url : process.env.REACT_APP_BASE_URL + '/user/searchuser?q=' + searchUserTrue + "&limit=" + limits,
       headers : {
         Authorization : `Bearer ${token}`
       }
@@ -114,7 +114,7 @@ const HEADERROOM = ({data}) => {
   const handleAddUser = () => {
     axios({
         method : "put",
-        url : "http://localhost:3456/api/room/addusertoroom/" + room._id,
+        url : process.env.REACT_APP_BASE_URL + "/room/addusertoroom/" + room._id,
         data : {
             userId : idUserAdd
         },
@@ -136,7 +136,7 @@ const HEADERROOM = ({data}) => {
   const handleEditRoom =() => {
     axios({
         method : "put",
-        url : "http://localhost:3456/api/room/updateroom/" + room._id,
+        url : process.env.REACT_APP_BASE_URL + "/room/updateroom/" + room._id,
         data : {
             nameRoom : nameRoomText,
             themes : themesText,
@@ -161,7 +161,7 @@ const HEADERROOM = ({data}) => {
   const handleBlockUserChat = (mbId) => {
     axios({
         method : "put",
-        url : "http://localhost:3456/api/room/blockchatuser/" + room._id,
+        url : process.env.REACT_APP_BASE_URL + "/room/blockchatuser/" + room._id,
         data : {
             userId : mbId
         },
@@ -182,7 +182,7 @@ const HEADERROOM = ({data}) => {
   const handleUnblockChatUser = (mbId) => {
     axios({
         method : "put",
-        url : "http://localhost:3456/api/room/unblockchatuser/" + room._id,
+        url : process.env.REACT_APP_BASE_URL + "/room/unblockchatuser/" + room._id,
         data : {
             userId : mbId
         },
@@ -204,7 +204,7 @@ const HEADERROOM = ({data}) => {
   const handleCheckAdmin = (userId) => {
     axios({
         method : "put",
-        url : "http://localhost:3456/api/room/admingroup/" + room._id,
+        url : process.env.REACT_APP_BASE_URL + "/room/admingroup/" + room._id,
         data : {
             userId
         },

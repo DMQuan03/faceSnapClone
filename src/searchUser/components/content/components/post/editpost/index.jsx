@@ -26,7 +26,7 @@ const EDITPOST = () => {
     
         axios({
           method : "patch",
-          url : process.env.REACT_APP_API6 + infoPostEdit._id ,
+          url : process.env.REACT_APP_BASE_URL + "/blog/update/" + infoPostEdit._id ,
           data : {
             title : textTitle,
           },
