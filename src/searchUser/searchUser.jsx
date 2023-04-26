@@ -18,7 +18,7 @@ const SEARCHUSER = () => {
   useEffect(() => {
     axios({
         method : "get",
-        url : process.env.REACT_APP_BASE_URL + "/user/updateuser",
+        url : process.env.REACT_APP_BASE_URL + "/user/currentuser/",
         headers : {
             authorization : `Bearer ${token}`
         }
