@@ -9,18 +9,12 @@ import {
 } from "react-icons/bs"
 
 const cx = classNames.bind(styles)
-const { token } = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query: {
-        token: `${token}`
-
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const Profils = () => {
 
     const navigate = useNavigate()
-    const { userId, token } = sessionStorage
+    const { userId, token, username , avatar } = sessionStorage
     const params = useParams()
     const [infoUser, setInfoUser] = useState([])
     const [blogOfUser, setBlogOfUser] = useState([])
@@ -94,7 +88,7 @@ const Profils = () => {
     }
 
     const handleCreateBlog = () => {
-        socket.emit("create_blog", { title : textTitle })
+        socket.emit("create_blog", { title : textTitle , CurrentUserId : infoUser })
     }
 
     useEffect(() => {
@@ -156,7 +150,13 @@ const Profils = () => {
     }, [])
 
     const handleAddFriend = () => {
-        socket.emit("send_req_to_user_add", {userId : infoUser._id})
+        const data = {
+            userId : infoUser._id,
+            currentUserId : userId,
+            currentUserFullName : username,
+            currentUserAvatar : avatar
+        }
+        socket.emit("send_req_to_user_add", {data})
     }
 
     const handleRemoveAddfr = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from "./chatroom.module.scss"
 import NAYBARCHAT from './components/navbar/nav'
@@ -6,12 +6,7 @@ import INFOROOMCHAT from './components/room/room'
 import { io } from 'socket.io-client'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-const { token } = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-  query : {
-    token
-  }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const cx = classNames.bind(styles)
 

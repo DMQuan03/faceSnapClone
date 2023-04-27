@@ -16,10 +16,6 @@ import GROUPCHATLIST from './groupchat'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const test = [
-    1,2,3,3,3,3,3,3,
-]
-
 const cx = classNames.bind(styles)
 const NAVLISTFR = () => {
     // state thu vien

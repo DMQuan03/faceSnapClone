@@ -5,12 +5,7 @@ import NAVBARVIDEO from './components/navbar/index'
 import LISTVIDEO from './components/content/listvideo'
 import { io } from 'socket.io-client'
 
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-  query : {
-    token
-  }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const cx = classNames.bind(styles)
 const WATCH = () => {

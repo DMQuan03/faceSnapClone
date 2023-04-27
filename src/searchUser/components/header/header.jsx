@@ -35,12 +35,6 @@ import {
 import {
     IoLogOut
 } from "react-icons/io5"
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
 const cx = classNames.bind(styles)
 
 const HEADERSEARHUSER  = () => {

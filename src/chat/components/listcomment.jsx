@@ -6,15 +6,11 @@ import {TbMessageCircleOff} from "react-icons/tb"
 import { format } from 'timeago.js'
 import { io } from 'socket.io-client'
 
-const {token} = sessionStorage
-
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token : token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const LISTCOMMENT = ({data, idBlog}) => {
+
+    const {userId} =sessionStorage
 
     const [check , setCheck] = useState(true)
     const [checkDelete , setCheckDelete] = useState(false)
@@ -147,7 +143,12 @@ const LISTCOMMENT = ({data, idBlog}) => {
                 }>
                     <button
                     onClick={() => {
-                        socket.emit("remove_comment", { id : data._id, idBlog : idBlog})
+                        const infoPayload = {
+                            currentUserId : userId,
+                            id : data._id, 
+                            idBlog : idBlog
+                        }
+                        socket.emit("remove_comment", infoPayload)
                     }}
                      style={
                         {

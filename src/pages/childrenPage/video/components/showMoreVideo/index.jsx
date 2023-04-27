@@ -8,40 +8,94 @@ import {
     GrFormView
 } from "react-icons/gr"
 import {
-    AiOutlineLike
+    AiOutlineLike,
+    AiOutlinePlus,
+    AiTwotoneSetting,
+    AiFillExclamationCircle,
+    AiFillQuestionCircle
 } from "react-icons/ai"
 import {
     RiShareForwardLine
 } from "react-icons/ri"
 import {
-    BsFillSendCheckFill
+    BsFillSendCheckFill,
+    BsMessenger,
+    BsFillMoonFill
 } from "react-icons/bs"
+import {
+    HiBellAlert
+} from "react-icons/hi2"
 import {
     BiArrowBack
 } from "react-icons/bi"
+import {
+    IoLogOut
+} from "react-icons/io5"
 import LISTCOMMENTVIDEOWATCH from '../listCommentVideo'
 import { useDispatch, useSelector } from 'react-redux'
 import videoSlice from '../../../../../redux/slice/videoSlice'
 import { format } from 'timeago.js'
 import axios from 'axios'
 import { io } from 'socket.io-client'
+import { useNavigate } from 'react-router-dom'
+import Tippy from "@tippyjs/react/headless"
 const cx = classNames.bind(styles)
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const SHOWMOREVIDEO = () => {
-    const {avatar , token} = sessionStorage
+    const {avatar , token, username , userId} = sessionStorage
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const myRef = useRef()
     const infoVideo = useSelector(state => state.video.infoOnlyVideo)
 
 
     const [listComments , setListComment] = useState([])
     const [textComment , setTextComment] = useState("")
+
+    const MENU_ITEM = [
+        {
+            id : 1,
+            title : "Cài đặt & quyền riêng tư",
+            icon : <AiTwotoneSetting className={cx("icon_header")} />,
+            onClick : () => {
+
+            }
+        },
+        {
+            id : 2,
+            title : "Trợ giúp & hỗ trợ",
+            icon : <AiFillQuestionCircle className={cx("icon_header")} />,
+            onClick : () => {
+
+            }
+        },
+        {
+            id : 3,
+            title : "Màn hình & trợ năng",
+            icon : <BsFillMoonFill className={cx("icon_header")} />,
+            onClick : () => {
+
+            }
+        },
+        {
+            id : 4,
+            title : "Đóng góp ý kiến",
+            icon : <AiFillExclamationCircle className={cx("icon_header")} />,
+            onClick : () => {
+
+            }
+        },
+        {
+            id : 1,
+            title : "Đăng xuất",
+            icon : <IoLogOut className={cx("icon_header")} />,
+            onClick : () => {
+                sessionStorage.clear()
+                navigate("/")
+            }
+        },
+    ]
 
     useEffect(() => {
         axios({
@@ -61,7 +115,14 @@ const SHOWMOREVIDEO = () => {
     }, [])
 
     const handleUserCommentVideo = () => {
-        socket.emit("user_comment_video", { text : textComment, idVideo : infoVideo._id})
+        const infoPayload = {
+            text : textComment, 
+            idVideo : infoVideo._id,
+            currentUserId : userId,
+            currentUserFullName : username,
+            currentUserAvatar : avatar
+        }
+        socket.emit("user_comment_video", infoPayload)
         myRef.current.focus()
         setTextComment("")
     }
@@ -76,7 +137,7 @@ const SHOWMOREVIDEO = () => {
         socket.emit("join_room", {id : infoVideo._id})
         return () => {
             setListComment([])
-            socket.emit("leave_room_video", {id : infoVideo._id})
+            socket.emit("leave_room", {id : infoVideo._id})
         }
     }, [])
   return (
@@ -113,7 +174,224 @@ const SHOWMOREVIDEO = () => {
                 }
             } /></button>
         <div className={cx("list_cmt")}>
-            <div className={cx("navbar_cmt")}></div>
+            <div className={cx("navbar_cmt")}>
+            <div style={
+                {
+                    width : 50,
+                    height : "100%",
+                    display : "flex",
+                    justifyContent : 'center',
+                    alignItems :'center',
+                    textAlign : "center"
+                }
+            }>
+                <button style={
+                    {
+                        width : 40,
+                        height : 40,
+                        borderRadius : "50%",
+                        border : "none",
+                        outline : "none",
+                        backgroundColor : "#e4e6eb",
+                        display : 'flex',
+                        justifyContent : "center",
+                        alignItems : "center",
+                        textAlign : 'center'
+                    }
+                }><AiOutlinePlus style={
+                    {
+                        width : 17,
+                        height : 17,
+                        rotate : "90deg"
+                    }
+                } /></button>
+            </div>
+            <div style={
+                {
+                    width : 50,
+                    height : "100%",
+                    display : "flex",
+                    justifyContent : 'center',
+                    alignItems :'center',
+                    textAlign : "center"
+                }
+            }>
+                <button 
+                onClick={() => {
+                    navigate("/chat")
+                }}
+                style={
+                    {
+                        width : 40,
+                        height : 40,
+                        borderRadius : "50%",
+                        border : "none",
+                        outline : "none",
+                        backgroundColor : "#e4e6eb",
+                        display : 'flex',
+                        justifyContent : "center",
+                        alignItems : "center",
+                        textAlign : 'center',
+                        cursor : "pointer"
+                    }
+                }><BsMessenger style={
+                    {
+                        width : 17,
+                        height : 17,
+                        rotate : "90deg"
+                    }
+                } /></button>
+            </div>
+            <div style={
+                {
+                    width : 50,
+                    height : "100%",
+                    display : "flex",
+                    justifyContent : 'center',
+                    alignItems :'center',
+                    textAlign : "center"
+                }
+            }>
+                <button style={
+                    {
+                        width : 40,
+                        height : 40,
+                        borderRadius : "50%",
+                        border : "none",
+                        outline : "none",
+                        backgroundColor : "#e4e6eb",
+                        display : 'flex',
+                        justifyContent : "center",
+                        alignItems : "center",
+                        textAlign : 'center'
+                    }
+                }><HiBellAlert style={
+                    {
+                        width : 22,
+                        height : 22,
+                        rotate : "90deg"
+                    }
+                } /></button>
+            </div>
+           <Tippy
+           interactive
+           placement='bottom-start'
+           render={attrs => (
+             <div className={cx("item_menu_header")} tabIndex={"-1"} {...attrs}>
+                <div className={cx("info_user_header")}>
+                    <div className={cx("container_infoUser_header")}>
+                        <div 
+                        onClick={() => {
+                            navigate("/profile/" + userId)
+                        }}
+                        style={
+                            {
+                                width : "100%",
+                                height : "70%",
+                                display : "flex",
+                                justifyContent : "flex-start",
+                                alignItems : "center",
+                                textAlign : 'center',
+                                borderBottom : "1px solid #333",
+                                cursor : "pointer"
+                            }
+                        }>
+                            <div><img style={
+                                {
+                                    width : 40,
+                                    height : 40,
+                                    borderRadius : "50%"
+                                }
+                            } src={avatar || ""} /></div>
+                            <div
+                            style={
+                                {
+                                    marginLeft : 10
+                                }
+                            }
+                            >{username}</div>
+                        </div>
+                        <div style={
+                            {
+                                width : "100%",
+                                height : "50%",
+                                display : "flex",
+                                justifyContent : "flex-start",
+                                alignItems : "center",
+                                textAlign : 'center',
+                                cursor : "pointer"
+                            }
+                        }>
+                            <p 
+                            onClick={() => {
+                                navigate("/profile/" + userId)
+                            }}
+                            style={
+                                {
+                                    marginTop : 0,
+                                    fontSize : ".9rem",
+                                    color : '#3386f4'
+                                }
+                            }>Xem tất cả trang cá nhân</p>
+                        </div>
+                        {MENU_ITEM.map(el => (
+                            <div key={el.id} className={cx("content_item")} onClick={el.onClick}>
+                                <button style={
+                                    {
+                                        borderRadius : "50%",
+                                        border : "none",
+                                        outline : "none",
+                                        display : "flex",
+                                        justifyContent : 'center',
+                                        alignItems : 'center',
+                                        textAlign : "center",
+                                        width : 40,
+                                        height : 40
+                                    }
+                                }>{el.icon}</button>
+                                <div style={
+                                    {
+                                        marginLeft : 10
+                                    }
+                                }><p style={
+                                    {
+                                        fontWeight : 600,
+
+                                    }
+                                }>{el.title}</p></div>
+                            </div>
+                        ))}
+                        <div style={
+                            {
+                                width : '100%',
+                                height : 50,
+                            }
+                        }>
+                            <span style={
+                                {
+                                    fontSize : ".8rem"
+                                }
+                            }>Quyền riêng tư . Điều khoản . Quảng cáo . Lựa chọn</span>
+                            <span style={
+                                {
+                                    fontSize : ".8rem"
+                                }
+                            }>quảng cáo . Cookie . Xem thêm . Meta @ 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           )}
+           >
+                <img className={cx("infoUser")} style={
+                    {
+                        width : 40,
+                        height : 40,
+                        marginRight : 10
+                    }
+                } src={avatar} alt='a' />
+           </Tippy>
+            </div>
             <div className={cx("wrapper_intro")}>
                 <div className={cx("info_user_group")}>
                     <div style={

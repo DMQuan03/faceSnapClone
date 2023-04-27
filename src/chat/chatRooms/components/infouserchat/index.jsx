@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import classNames from 'classnames/bind'
 import styles from "./only.module.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
 import chatSlice from '../../../../redux/slice/chatSlice'
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 const cx = classNames.bind(styles)
 
 const INFOUSERCHAT = () => {
@@ -41,7 +36,7 @@ const INFOUSERCHAT = () => {
         <p>{username}</p>
         <button className={cx('btn-header-info888')} 
         onClick={() => {
-            socket.emit("leave_room_blog", {idBlog : room._id})
+            socket.emit("leave_room", {id : room._id})
             navigate("/home")
             dispatch(chatSlice.actions.infoRoom({}))
             dispatch(chatSlice.actions.listMessages([]))

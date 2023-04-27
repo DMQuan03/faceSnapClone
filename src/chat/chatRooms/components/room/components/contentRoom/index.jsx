@@ -8,21 +8,24 @@ import ScrollToBottom from 'react-scroll-to-bottom'
 
 const cx = classNames.bind(styles)
 const {token } = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const CONTENTROOM = ({data}) => {
     const [textMess , setTextMess] = useState("")
-    const {userId} = sessionStorage
+    const {userId, username , avatar} = sessionStorage
     const myref = useRef()
     const listMesss = useSelector(state => state.chat.listMessage)
     const room = useSelector(state => state.chat.infoRoom)
 
     const handleSendMess = () => {
-        socket.emit("user_send_mess_room_chat", { text : textMess, RoomId : room._id })
+        const infoPayload = {
+            text : textMess,
+            RoomId : room._id,
+            currentUserId : userId,
+            currentUserFullName : username,
+            currentUserAvatar : avatar
+        }
+        socket.emit("user_send_mess_room_chat", { infoPayload})
         myref.current.focus()
         setTextMess("")
     }

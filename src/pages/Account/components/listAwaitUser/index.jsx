@@ -4,17 +4,19 @@ import styles from "./index.module.scss"
 import { io } from 'socket.io-client'
 import axios from 'axios'
 const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 const cx = classNames.bind(styles)
 
 const LISTAWAIT = ({data}) => {
 
+    const {userId} = sessionStorage
+
     const addFrOk = () => {
-        socket.emit("add_Friend", { userId : data._id })
+        const infoUser = {
+            userId : data._id,
+            currentUserId : userId
+        }
+        socket.emit("add_Friend", { infoUser })
     }
     const noAdd = () => {
         axios({

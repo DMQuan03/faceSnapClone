@@ -3,12 +3,7 @@ import HEADERSEARHUSER from '../../searchUser/components/header/header'
 import { io } from 'socket.io-client'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-  query : {
-    token
-  }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const FACEBOOK = ({children}) => {
 

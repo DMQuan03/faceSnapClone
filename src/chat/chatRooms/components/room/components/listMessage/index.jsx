@@ -5,18 +5,13 @@ import { io } from 'socket.io-client'
 import { format } from "timeago.js"
 import { RiChatDeleteLine } from "react-icons/ri"
 
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 const cx = classNames.bind(styles)
 
 const LISTMESS = ({id, data}) => {
 
     const [checkShowMess , setCheckShowMess] = useState(true)
-    const { userId} = sessionStorage
+    const { userId } = sessionStorage
     
     useEffect(() => {
         socket.on("remove_message_success", (cmt) => {
@@ -25,11 +20,8 @@ const LISTMESS = ({id, data}) => {
                 return 1
             }
         })
-    }, [socket])
-
-    useEffect(() => {
-        console.log(data);
     }, [])
+
   return (
     <>
         {checkShowMess ? <div id={cx(id)} className={cx("ls_ms")}>
@@ -53,7 +45,12 @@ const LISTMESS = ({id, data}) => {
                     {data?.userId?._id === userId && <p
                     
                     onClick={() => {
-                        socket.emit("user_remove_message", { id : data._id , idRoom : data.idRoom })
+                        const infoPayload = {
+                            currentUserId : userId,
+                            id : data._id , 
+                            idRoom : data.idRoom
+                        }
+                        socket.emit("user_remove_message", infoPayload)
                     }}
                     ><RiChatDeleteLine id={cx(id)} className={cx("icon_dlt")} /></p>}
                 </div>

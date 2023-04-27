@@ -2,6 +2,9 @@ import React from 'react'
 import classNames from 'classnames/bind'
 import styles from "./index.module.scss"
 import { format } from 'timeago.js'
+import {
+    BiDotsHorizontalRounded
+} from "react-icons/bi"
 const cx = classNames.bind(styles)
 
 const LISTCOMMENTVIDEOWATCH = ({data}) => {
@@ -71,6 +74,15 @@ const LISTCOMMENTVIDEOWATCH = ({data}) => {
                     }
                 }>{format(data?.createdAt) || "just now"}</p>
             </div>
+        </div>
+        <div className={cx("icon_comment_video")}>
+            <BiDotsHorizontalRounded style={
+                {
+                    width : 20,
+                    height : 20,
+                    rotate : "90deg",
+                }
+            } />
         </div>
     </div>
   )

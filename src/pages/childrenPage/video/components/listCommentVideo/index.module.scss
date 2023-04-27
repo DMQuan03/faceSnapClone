@@ -5,19 +5,27 @@
     margin-top: 10px;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
 
     .info_comment {
-        width: 80%;
-        max-width: 75%;
+        width: auto;
+        max-width: 65%;
+        min-width: 40%;
         height: auto;
         min-height: 40px;
-        margin-left: 20px;
         height: 100%;
+        margin-left: 60px;
         position: relative;
         margin-top: 14px;
         border-radius: 20px;
+    }
+
+    .icon_comment_video {
+        width: 20px;
+        height: 20px;
+        margin-left: 20px;
+        position: relative;
     }
 }

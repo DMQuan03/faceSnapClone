@@ -8,12 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
 import ALLFRIENDS from './components/allfriends'
 import { useSelector } from 'react-redux'
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const cx= classNames.bind(styles)
 

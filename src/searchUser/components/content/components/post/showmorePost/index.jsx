@@ -23,12 +23,7 @@ import axios from 'axios'
 import LISTCOMMENT from '../../../../../../chat/components/listcomment'
 import { io } from 'socket.io-client'
 
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 const cx = classNames.bind(styles)
 
@@ -37,7 +32,7 @@ const cx = classNames.bind(styles)
 const SHOWMORE = () => {
     // state thu vien
     const dispatch = useDispatch()
-    const {avatar, userId , token } = sessionStorage
+    const {avatar, userId , token, username } = sessionStorage
     const infoPost = useSelector(state => state.blog.infoOnlyPost)
     
     
@@ -86,7 +81,7 @@ const SHOWMORE = () => {
     useEffect(() => {
         socket.emit("join_room", {id : infoPost._id})
         return () => {
-            socket.emit("leave_room_blog", {blogId : infoPost._id})
+            socket.emit("leave_room", {id : infoPost._id})
         }
     }, [])
     const handleLike = () => {
@@ -126,7 +121,7 @@ const SHOWMORE = () => {
                 <h2>Bài viết của {infoPost?.userId?.fullName}</h2>
                 <div 
                 onClick={() => {
-                    socket.emit("leave_room_blog", {blogId : infoPost._id})
+                    socket.emit("leave_room", {id : infoPost._id})
                     dispatch(blogSlice.actions.unShowMore())
                     dispatch(blogSlice.actions.infoOnlyPost({}))
                 }}
@@ -477,7 +472,14 @@ const SHOWMORE = () => {
                     }} />
                     <button 
                     onClick={() => {
-                        socket.emit("user_comment", {text : textComment, idBlog : infoPost._id})
+                        const infoPayload = {
+                            text : textComment, 
+                            idBlog : infoPost._id,
+                            currentUserId : userId,
+                            currentUserFullName : username,
+                            currentUserAvatar : avatar
+                        }
+                        socket.emit("user_comment", infoPayload)
                         setTextComment("")
                     }}
                     style={

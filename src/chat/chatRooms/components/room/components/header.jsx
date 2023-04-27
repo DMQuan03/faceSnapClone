@@ -5,11 +5,7 @@ import chatSlice from '../../../../../redux/slice/chatSlice'
 import axios from 'axios'
 import { Col } from 'antd'
 const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 
 
 const HEADERROOM = ({data}) => {
@@ -441,7 +437,7 @@ const HEADERROOM = ({data}) => {
                             marginTop : 10
                         }
                     } onClick={() => {
-                        socket.emit("leave_room_chat", {roomChat : room._id})
+                        socket.emit("leave_room", {id : room._id})
                         dispatch(chatSlice.actions.infoRoom({}))
                         dispatch(chatSlice.actions.listMessages([]))
                     }}>Leave</button>

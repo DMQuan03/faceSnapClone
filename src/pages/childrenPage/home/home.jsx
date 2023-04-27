@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom'
 import CREATEPOST from './components/createPost'
 import { useDispatch, useSelector } from 'react-redux'
 import blogSlice from '../../../redux/slice/blogSlice'
+import { BLOGANDVIDEO } from './components/blogAndVideo'
 
 
 const cx = classNames.bind(styles)
@@ -59,21 +60,20 @@ const HOME = () => {
 
     axios({
         method : "get",
-        url : process.env.REACT_APP_BASE_URL + "/blog/" + "?limit=" + limit,
+        url : process.env.REACT_APP_BASE_URL + "/utils/blogandvideo/" + "?limit=" + limit,
         headers : {
             authorization : `Bearer ${token}`
         }
     })
     .then(res => {
+      console.log(res.data.data);
         dispatch(blogSlice.actions.listPost(res.data.data))
     })
     .catch(err => {
         console.log(err.message);
     })
    }, [limit])
-
   
-
    useEffect(() => {
     setListPost(listBlg)
    }, [listBlg])
@@ -302,7 +302,7 @@ const HOME = () => {
         </div>
         <NAVLISTFR />
           {listPost?.length > 0 && listPost?.map(el => {
-            return <POSTSEARCH data={el} />
+            return <BLOGANDVIDEO key={el?._id} data={el} />
           })}
           <p onClick={() => {
             setLimit(limit + 20)

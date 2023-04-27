@@ -1,13 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import chatSlice from '../../../../../redux/slice/chatSlice'
 import { io } from 'socket.io-client'
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+const socket = io.connect(process.env.REACT_APP_SOCKET)
 const ROOMS = ({data}) => {
     const {userId} = sessionStorage
     const dispatch = useDispatch()
@@ -17,7 +12,7 @@ const ROOMS = ({data}) => {
 
     const handleGetInfoRoom = async() => {
         try {
-            socket.emit("leave_room_chat", {roomChat : room._id})
+            socket.emit("leave_room", {id : room._id})
             socket.emit("join_room", { id : data._id })
             socket.emit("getMessageRoomChat", { idRoomChat : data._id })
             sessionStorage.setItem("asdaskdiisadkjnkcjhajshdahsdlkasdkh", data._id)

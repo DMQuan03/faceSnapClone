@@ -100,7 +100,7 @@ const VIDEOHOMEPAGE = ({data}) => {
         </div>
         <div className={cx("show_like")}>
             <div className={cx("like_share")}>
-                {data.userLikes.includes(userId) ? 
+                {data?.userLikes?.includes(userId) ? 
                 checkLike ?
                 <button 
                 onClick={() => {
@@ -251,11 +251,11 @@ const VIDEOHOMEPAGE = ({data}) => {
                                 cursor : "pointer",
                                 color : '#129ef8'
                             }
-                        }>{data.likes === 0 ? checkLike ? 0 + " lượt thích" : "bạn" : 
-                        data.userLikes.includes(userId) ? 
-                        checkLike ? data.likes > 1 ? "bạn và " + (data.likes - 1) + " người khác" : "bạn" :
-                        data.likes > 0 ? (data?.likes - 1) + " người khác" : 0 + " lượt thích" : 
-                        checkLike ? (data?.likes) + "người khác" : "bạn và " + (data.likes) + " người khác"
+                        }>{data?.likes === 0 ? checkLike ? 0 + " lượt thích" : "bạn" : 
+                        data?.userLikes?.includes(userId) ? 
+                        checkLike ? data?.likes > 1 ? "bạn và " + (data?.likes - 1) + " người khác" : "bạn" :
+                        data?.likes > 1 ? (data?.likes - 1) + " người khác" : 0 + " lượt thích" : 
+                        checkLike ? (data?.likes) + "người khác" : "bạn và " + (data?.likes) + " người khác"
                         }</p>
                     </div>
                 </div>

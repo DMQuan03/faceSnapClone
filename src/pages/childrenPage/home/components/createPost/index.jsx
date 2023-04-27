@@ -1,28 +1,28 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { Fragment, memo,  useMemo, useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from "./index.module.scss"
 import {
-    BiArrowBack
+    BiArrowBack,
+    BiDotsHorizontalRounded
 } from "react-icons/bi"
 import { useDispatch, useSelector } from 'react-redux'
 import blogSlice from '../../../../../redux/slice/blogSlice'
-import { io } from 'socket.io-client'
-const {token} = sessionStorage
-const socket = io.connect(process.env.REACT_APP_SOCKET, {
-    query : {
-        token
-    }
-})
+import axios from 'axios'
 
 const cx = classNames.bind(styles)
 const CREATEPOST = () => {
 
     const dispatch = useDispatch()
-    const {avatar} = sessionStorage
+    const {avatar , userId, username, token} = sessionStorage
+    const temp = useSelector(state => state.blog.temp)
+    
+
+    // custom state
     const [text , setText] = useState("")
     const [fileText , setFileText] = useState("")
-    const temp = useSelector(state => state.blog.temp)
-
+    const [fileVideotext , setVideoText] = useState("")
+    const [checkShowImg , setCheckShowImg] = useState(false)
+    const [createVideo , setCreateVideo] = useState(false)
     // useEffect(() => {
 
     //     return () => {
@@ -37,23 +37,51 @@ const CREATEPOST = () => {
     // }
 
     const createBlog = () => {
-        socket.emit("create_blog" , { title : text , img : fileText })
-        dispatch(blogSlice.actions.UnShowCreateBlog())
-        setFileText("")
-        setText("")
+        axios({
+            method : "post",
+            url : process.env.REACT_APP_BASE_URL + "/blog/create",
+            data : {
+                title : text,
+                img : fileText,
+            },
+            headers : {
+                authorization : `Bearer ${token}`
+            }
+        })
+        .then(res => {
+            console.log(res.data);
+            dispatch(blogSlice.actions.createPost(res.data.newVideoAndPost))
+            dispatch(blogSlice.actions.UnShowCreateBlog())
+            return 1
+        })
+        .then(err => {
+            console.log(err);
+        })
        }
 
-       useMemo(() => {
-        socket.on("return_blog", (data) => {
-                if (temp._id !== data._id) {
-                    dispatch(blogSlice.actions.createPost(data))
-                    dispatch(blogSlice.actions.setTemp(data))
-                    return 1
-                }else {
-                    return 0
-                }
+    const handleCreateVideo =() => {
+        axios({
+            method : "post",
+            url : process.env.REACT_APP_BASE_URL + "/video/create",
+            data : {
+                title : text,
+                video : fileVideotext,
+            },
+            headers : {
+                authorization : `Bearer ${token}`
+            }
         })
-       }, [socket])
+        .then(res => {
+            console.log(res.data);
+            dispatch(blogSlice.actions.createPost(res.data.newVideoAndPost))
+            dispatch(blogSlice.actions.UnShowCreateBlog())
+            return 1
+        })
+        .then(err => {
+            console.log(err);
+        })
+    }
+
   return (
     <div className={cx("wrapper")}>
         <div className={cx("container")}>
@@ -90,7 +118,9 @@ const CREATEPOST = () => {
                         {
                             width : 40,
                             height : 40,
-                            borderRadius : '50%'
+                            borderRadius : '50%',
+                            marginLeft : 20,
+                            
                         }
                     } src={avatar} alt='a' />
                 </div>
@@ -99,7 +129,7 @@ const CREATEPOST = () => {
                         marginLeft : 20
                     }
                 }>
-                    <p>duong minh quan 3005</p>
+                    <p>{username}</p>
                 </div>
             </div>
             <div className={cx("content_true")}>
@@ -126,22 +156,88 @@ const CREATEPOST = () => {
 
                 </textarea>
             </div>
-            {fileText && <div style={
+            {fileText && !fileVideotext && 
+            <div style={
                 {
                     width : "100%",
                     height : "auto",
-                    minHeight : 200,
-                    
+                    minHeight : 400,
+                    maxHeight : 400,
+                    position : "relative"
                 }
             }>
             <img style={
                 {
                     width : '100%',
-                    height : '100%'
+                    height : '100%',
+                    position : "absolute",
+                    top : 0,
+                    bottom : 0,
+                    left : 0,
+                    right : 0
                 }
             } src={fileText || ""} />
+            
 
             </div>}
+
+
+            {fileVideotext && !fileText && 
+            <div style={
+                {
+                    width : "100%",
+                    height : "auto",
+                    minHeight : 400,
+                    maxHeight : 400,
+                    position : "relative"
+                }
+            }>
+               <iframe width="100%" height="395" src={`https://www.youtube.com/embed/${fileVideotext}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> 
+            </div>}
+
+
+            {checkShowImg
+            ? 
+            createVideo ? <div style={
+                {
+                    width : "100%",
+                    height : 30,
+                    display : "flex",
+                    justifyContent : "space-between",
+                    alignItems : 'center',
+                    textAlign : "center"
+                }
+            }>
+                <input 
+                value={fileVideotext}
+                style={
+                    {
+                        marginLeft : 30
+                    }
+                } type='text' onChange={(e) => {
+                    setVideoText(e.target.value)
+                }}/>
+                <button 
+                onClick={() => {
+                    setCreateVideo(false)
+                    setVideoText("")
+                }}
+                style={
+                    {
+                        marginLeft : 90
+                    }
+                }>Đăng ảnh</button>
+                <button 
+                onClick={() => {
+                    setVideoText("")
+                }}
+                style={
+                    {
+                        marginRight : 30
+                    }
+                }>clear video</button>
+            </div>
+            :
             <div style={
                 {
                     width : "100%",
@@ -156,34 +252,150 @@ const CREATEPOST = () => {
                 value={fileText}
                 style={
                     {
-                        marginLeft : 20
+                        marginLeft : 30
                     }
                 } type='text' onChange={(e) => {
                     setFileText(e.target.value)
                 }}/>
                 <button 
                 onClick={() => {
+                    setCreateVideo(true)
                     setFileText("")
                 }}
                 style={
                     {
-                        marginRight : 20
+                        marginLeft : 90
+                    }
+                }>Đăng video</button>
+                <button 
+                onClick={() => {
+                    setFileText("")
+                }}
+                style={
+                    {
+                        marginRight : 30
                     }
                 }>clear img</button>
             </div>
+            :
+            <Fragment />
+            }
             <div style={
                 {
                     width : '100%',
                     height : 60,
-                    backgroundColor : "red",
                     position : "relative",
                     display : 'flex',
-                    justifyContent : 'flex-start',
+                    justifyContent : 'center',
                     alignItems : "center",
                     textAlign : "center"
                 }
             }>
-
+                <div style={
+                    {
+                        width : "90%",
+                        height : "90%",
+                        borderRadius : 10,
+                        display : "flex",
+                        justifyContent : "flex-end",
+                        alignItems : "center",
+                        textAlign : 'center',
+                        backgroundColor : "#fff",
+                        border : "1px solid #d1c9c9"
+                    }
+                }>
+                        <div style={
+                            {
+                                width : 250,
+                                display : "flex",
+                                justifyContent : "flex-start"
+                            }
+                        }><p style={
+                            {
+                                marginLeft : 10,
+                                cursor : "pointer"
+                            }
+                        }>Thêm vào bài viết của bạn</p></div>
+                        <div style={
+                            {
+                                marginRight : 5,
+                                width : 30
+                            }
+                        }>
+                            <img 
+                            onClick={() => {
+                                setCheckShowImg(!checkShowImg)
+                            }}
+                            src='https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/Ivw7nhRtXyo.png' style={
+                                {
+                                    width : 25,
+                                    height : 25
+                                }
+                            } />
+                        </div>
+                        <div style={
+                            {
+                                marginRight : 5,
+                                width : 30
+                            }
+                        }>
+                            <img src='https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/b37mHA1PjfK.png' style={
+                                {
+                                    width : 25,
+                                    height : 25
+                                }
+                            } />
+                        </div>
+                        <div style={
+                            {
+                                marginRight : 5,
+                                width : 30
+                            }
+                        }>
+                            <img src='https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Y4mYLVOhTwq.png' style={
+                                {
+                                    width : 25,
+                                    height : 25
+                                }
+                            } />
+                        </div>
+                        <div style={
+                            {
+                                marginRight : 5,
+                                width : 30
+                            }
+                        }>
+                            <img src='https://static.xx.fbcdn.net/rsrc.php/v3/y1/r/8zlaieBcZ72.png' style={
+                                {
+                                    width : 25,
+                                    height : 25
+                                }
+                            } />
+                        </div>
+                        <div style={
+                            {
+                                marginRight : 5,
+                                width : 30
+                            }
+                        }>
+                            <img src='https://static.xx.fbcdn.net/rsrc.php/v3/yT/r/q7MiRkL7MLC.png' style={
+                                {
+                                    width : 25,
+                                    height : 25
+                                }
+                            } />
+                        </div>
+                            <div>
+                                <BiDotsHorizontalRounded style={
+                                    {
+                                        width : 25,
+                                        height : 25,
+                                        rotate : "90deg",
+                                        marginRight : 10
+                                    }
+                                } />
+                            </div>
+                </div>
             </div>
             <div style={
                 {
@@ -198,7 +410,21 @@ const CREATEPOST = () => {
                     borderBottomLeftRadius : 10,
                 }
             }>
-                {text ? <button 
+                {text ? 
+                createVideo ?
+                <button 
+                onClick={handleCreateVideo}
+                style={
+                    {
+                        width : "90%",
+                        height : "70%",
+                        outline :"none",
+                        border : "none",
+                        borderRadius : 10
+                    }
+                }>Đăng</button>
+                :
+                <button 
                 onClick={createBlog}
                 style={
                     {
@@ -208,7 +434,8 @@ const CREATEPOST = () => {
                         border : "none",
                         borderRadius : 10
                     }
-                }>Đăng</button> : 
+                }>Đăng</button>
+                : 
                 <button 
                 style={
                     {
