@@ -42,26 +42,44 @@ const SHOWMORE = () => {
     const [textComment , setTextComment] = useState("")
 
     useEffect(() => {
-        axios({
-            method : "get",
-            url : "http://localhost:3456/api/utils/getcomment/" + infoPost._id,
-            headers : {
-               authorization :  `Bearer ${token}`
-            } 
-        })
-        .then(res => {
-            setListComment(res.data.data);
-        })
-        .catch(err => {
-            console.log(err);
-            return 0
-        })
+        if (infoPost.idCateGory) {
+            axios({
+                method : "get",
+                url : "http://localhost:3456/api/utils/getcomment/" + infoPost.idCateGory,
+                headers : {
+                   authorization :  `Bearer ${token}`
+                } 
+            })
+            .then(res => {
+                setListComment(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+                return 0
+            })
+        }else {
+            axios({
+                method : "get",
+                url : "http://localhost:3456/api/utils/getcomment/" + infoPost._id,
+                headers : {
+                   authorization :  `Bearer ${token}`
+                } 
+            })
+            .then(res => {
+                setListComment(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+                return 0
+            })
+        }
     }, [])
 
     useEffect(() => {
         socket.on("sever_return_comment", (data) => {
-            if (data._id === infoPost._id) {
+            if (data._id === infoPost._id || data._id === infoPost.idCateGory) {
                 setListComment(prev => [data , ...prev])
+                setTextComment("")
                 return 1
             }else {
                 return 0
@@ -79,41 +97,83 @@ const SHOWMORE = () => {
 
 
     useEffect(() => {
-        socket.emit("join_room", {id : infoPost._id})
+        if (infoPost.idCateGory) {
+            socket.emit("join_room", {id : infoPost.idCateGory})
+        }else {
+            socket.emit("join_room", {id : infoPost._id})
+        }
         return () => {
-            socket.emit("leave_room", {id : infoPost._id})
+            if (infoPost.idCateGory) {
+                socket.emit("leave_room", {id : infoPost.idCateGory})
+            }else {
+                socket.emit("leave_room", {id : infoPost._id})
+            }
         }
     }, [])
     const handleLike = () => {
-        axios({
-          method : "put",
-          url : process.env.REACT_APP_BASE_URL + "/blog/like/"  + infoPost._id,
-          headers : {
-            Authorization : `Bearer ${token}`
-          }
-        })
-        .then(res => {
-          setCheckLikes(!CheckLikes)
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        if (infoPost.idCateGory) {
+            axios({
+              method : "put",
+              url : process.env.REACT_APP_BASE_URL + "/blog/like/"  + infoPost.idCateGory,
+              headers : {
+                Authorization : `Bearer ${token}`
+              }
+            })
+            .then(res => {
+              setCheckLikes(!CheckLikes)
+            })
+            .catch(err => {
+              console.log(err);
+            })
+
+        }else {
+            axios({
+                method : "put",
+                url : process.env.REACT_APP_BASE_URL + "/blog/like/"  + infoPost._id,
+                headers : {
+                  Authorization : `Bearer ${token}`
+                }
+              })
+              .then(res => {
+                setCheckLikes(!CheckLikes)
+              })
+              .catch(err => {
+                console.log(err);
+              })
+        }
       }
     
       const handleDislike = () => {
-        axios({
-          method : "put",
-          url : process.env.REACT_APP_BASE_URL + "/blog/dislike/"  + infoPost._id,
-          headers : {
-            Authorization : `Bearer ${token}`
-          }
-        })
-        .then(res => {
-          setCheckLikes(!CheckLikes)
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        if (infoPost.idCateGory) {
+            axios({
+              method : "put",
+              url : process.env.REACT_APP_BASE_URL + "/blog/dislike/"  + infoPost.idCateGory,
+              headers : {
+                Authorization : `Bearer ${token}`
+              }
+            })
+            .then(res => {
+              setCheckLikes(!CheckLikes)
+            })
+            .catch(err => {
+              console.log(err);
+            })
+            
+        }else {
+            axios({
+                method : "put",
+                url : process.env.REACT_APP_BASE_URL + "/blog/dislike/"  + infoPost._id,
+                headers : {
+                  Authorization : `Bearer ${token}`
+                }
+              })
+              .then(res => {
+                setCheckLikes(!CheckLikes)
+              })
+              .catch(err => {
+                console.log(err);
+              })  
+        }
       }
   return (
     <div className={cx("wrapper")}>
@@ -121,7 +181,11 @@ const SHOWMORE = () => {
                 <h2>Bài viết của {infoPost?.userId?.fullName}</h2>
                 <div 
                 onClick={() => {
-                    socket.emit("leave_room", {id : infoPost._id})
+                    if (!infoPost.idCateGory) {
+                        socket.emit("leave_room", {id : infoPost._id})
+                    }else {
+                        socket.emit("leave_room", {id : infoPost.idCateGory})
+                    }
                     dispatch(blogSlice.actions.unShowMore())
                     dispatch(blogSlice.actions.infoOnlyPost({}))
                 }}
@@ -251,7 +315,7 @@ const SHOWMORE = () => {
                         {
                             marginRight : 20
                         }
-                    }>{infoPost?.comments?.length || 0} comments</div>
+                    }>{infoPost?.comment?.length || 0} comments</div>
                     <div>{infoPost?.shares} share</div>
                 </div>
             </div>
@@ -420,8 +484,8 @@ const SHOWMORE = () => {
                     height : 400
                 }
             }>
-                {listComment.length > 0 && listComment?.map((el) => {
-                    return <LISTCOMMENT data={el} idBlog={infoPost._id} />
+                {listComment?.length > 0 && listComment?.map((el) => {
+                    return <LISTCOMMENT data={el} idBlog={infoPost?.idCateGory ? infoPost?.idCateGory : infoPost?._id} />
                 })}
             </div>
         </div>
@@ -458,6 +522,7 @@ const SHOWMORE = () => {
                     }
                 }>
                     <input 
+                    value={textComment}
                     onChange={(e) => {
                         setTextComment(e.target.value)
                     }}
@@ -474,13 +539,12 @@ const SHOWMORE = () => {
                     onClick={() => {
                         const infoPayload = {
                             text : textComment, 
-                            idBlog : infoPost._id,
+                            idBlog : infoPost.idCateGory ? infoPost.idCateGory : infoPost._id,
                             currentUserId : userId,
                             currentUserFullName : username,
                             currentUserAvatar : avatar
                         }
                         socket.emit("user_comment", infoPayload)
-                        setTextComment("")
                     }}
                     style={
                         {

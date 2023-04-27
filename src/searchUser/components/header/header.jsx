@@ -100,7 +100,7 @@ const HEADERSEARHUSER  = () => {
         useEffect(() => {
         axios({
           method : "get",
-          url : process.env.REACT_APP_BASE_URL + "/user/searchuser?q=" + searchUserTrue + "&limit=" + limit + "&limitBlog=" + limitBlog + "&limitVideo" + limitVideo,
+          url : process.env.REACT_APP_BASE_URL + "/user/searchuser?q=" + searchUserTrue + "&limit=" + limit + "&limitBlog=" + limitBlog + "&limitVideo=" + limitVideo,
           headers : {
             Authorization : `Bearer ${token}`
           }

@@ -60,7 +60,7 @@ const HOME = () => {
 
     axios({
         method : "get",
-        url : process.env.REACT_APP_BASE_URL + "/utils/blogandvideo/" + "?limit=" + limit,
+        url : process.env.REACT_APP_BASE_URL + "/utils/blogandvideo" + "?limit=" + limit,
         headers : {
             authorization : `Bearer ${token}`
         }

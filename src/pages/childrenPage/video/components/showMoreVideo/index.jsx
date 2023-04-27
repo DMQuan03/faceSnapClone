@@ -98,26 +98,48 @@ const SHOWMOREVIDEO = () => {
     ]
 
     useEffect(() => {
-        axios({
-            method : "get",
-            url : "http://localhost:3456/api/utils/getcomment/" + infoVideo._id,
-            headers : {
-               authorization :  `Bearer ${token}`
-            } 
-        })
-        .then(res => {
-            setListComment(res.data.data);
-        })
-        .catch(err => {
-            console.log(err);
-            return 0
-        })
+        if (infoVideo.idCateGory) {
+            axios({
+                method : "get",
+                url : "http://localhost:3456/api/utils/getcomment/" + infoVideo.idCateGory,
+                headers : {
+                   authorization :  `Bearer ${token}`
+                } 
+            })
+            .then(res => {
+                setListComment(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+                return 0
+            })
+        }else {
+            axios({
+                method : "get",
+                url : "http://localhost:3456/api/utils/getcomment/" + infoVideo._id,
+                headers : {
+                   authorization :  `Bearer ${token}`
+                } 
+            })
+            .then(res => {
+                setListComment(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+                return 0
+            })
+        }
     }, [])
 
     const handleUserCommentVideo = () => {
+        if (infoVideo.idCateGory) {
+            var idVideo = infoVideo.idCateGory
+        } else {
+            var idVideo = infoVideo._id
+        }
         const infoPayload = {
             text : textComment, 
-            idVideo : infoVideo._id,
+            idVideo,
             currentUserId : userId,
             currentUserFullName : username,
             currentUserAvatar : avatar
@@ -134,10 +156,19 @@ const SHOWMOREVIDEO = () => {
     }, [socket])
 
     useEffect(() => {
-        socket.emit("join_room", {id : infoVideo._id})
+        if (infoVideo.idCateGory) {
+            socket.emit("join_room", {id : infoVideo.idCateGory})
+        }else {
+            socket.emit("join_room", {id : infoVideo._id})
+        }
         return () => {
-            setListComment([])
-            socket.emit("leave_room", {id : infoVideo._id})
+            if (infoVideo.idCateGory) {
+                socket.emit("leave_room", {id : infoVideo.idCateGory})
+                setListComment([])
+            }else {
+                socket.emit("leave_room", {id : infoVideo._id})
+                setListComment([])
+            }
         }
     }, [])
   return (

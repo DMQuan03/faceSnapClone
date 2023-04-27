@@ -22,6 +22,11 @@ const LISTCOMMENT = ({data, idBlog}) => {
           }
         })
       }, [socket])
+
+      useEffect(() => {
+        console.log(data, 100);
+        console.log(idBlog, 1000);
+      }, [])
   return (
     <>
         {check ? <div className='wrapper_lscmt'>

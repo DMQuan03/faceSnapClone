@@ -23,25 +23,45 @@ const EDITPOST = () => {
     }, [])
 
     const handleEditBlog = () => {
-    
-        axios({
-          method : "patch",
-          url : process.env.REACT_APP_BASE_URL + "/blog/update/" + infoPostEdit._id ,
-          data : {
-            title : textTitle,
-          },
-          headers : {
-            authorization : `Bearer ${token}`
-          }
-        })
-        .then(res => {
-          dispatch(blogSlice.actions.unEditPost())
-          return 1
-        })
-        .catch(err => {
-          console.log(err.message)
-          return 0
-        })
+        if (infoPostEdit.idCateGory) {
+            axios({
+              method : "patch",
+              url : process.env.REACT_APP_BASE_URL + "/blog/update/" + infoPostEdit.idCateGory ,
+              data : {
+                title : textTitle,
+              },
+              headers : {
+                authorization : `Bearer ${token}`
+              }
+            })
+            .then(res => {
+              dispatch(blogSlice.actions.unEditPost())
+              return 1
+            })
+            .catch(err => {
+              console.log(err.message)
+              return 0
+            })
+        }else {
+            axios({
+              method : "patch",
+              url : process.env.REACT_APP_BASE_URL + "/blog/update/" + infoPostEdit._id ,
+              data : {
+                title : textTitle,
+              },
+              headers : {
+                authorization : `Bearer ${token}`
+              }
+            })
+            .then(res => {
+              dispatch(blogSlice.actions.unEditPost())
+              return 1
+            })
+            .catch(err => {
+              console.log(err.message)
+              return 0
+            })  
+        }
       }
   return (
     <div className={cx("wrapper")} >

@@ -153,7 +153,7 @@ export const BLOGANDVIDEO = ({data}) => {
       const handleShare = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_BASE_URL + "/blog/share/" +  data._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/share/" +  data?.idCateGory,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -170,7 +170,7 @@ export const BLOGANDVIDEO = ({data}) => {
       const handleUnshare = () => {
         axios({
           method : "put",
-          url : process.env.REACT_APP_BASE_URL + "/blog/unshare/" + data._id,
+          url : process.env.REACT_APP_BASE_URL + "/blog/unshare/" + data?.idCateGory,
           headers : {
             Authorization : `Bearer ${token}`
           }
@@ -277,8 +277,8 @@ export const BLOGANDVIDEO = ({data}) => {
                         }
                     }  src={data?.img || 'https://s.yimg.com/fz/api/res/1.2/of4O3I3Im0hNqpzcNoC_Xw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpbGw7aD0xOTI7cHhvZmY9MDtweW9mZj0wO3E9ODA7dz0xOTI-/https://s.yimg.com/zb/imgv1/29a03124-da69-34b2-9bcb-cafb923ea6a8/s_140x140'}
                     onClick={() => {
-                        socket.emit("join_room", {id : data._id})
-                        socket.emit("getCMT", {idBlog : data._id})
+                        socket.emit("join_room", {id : data.idCateGory})
+                        socket.emit("getCMT", {idBlog : data.idCateGory})
                         dispatch(blogSlice.actions.showMore())
                         dispatch(blogSlice.actions.infoOnlyPost(data))
                     }}
@@ -462,8 +462,8 @@ export const BLOGANDVIDEO = ({data}) => {
                     }
                     <button 
                     onClick={() => {
-                        socket.emit("join_room", {id : data._id})
-                        socket.emit("getCMT", {idBlog : data._id})
+                        socket.emit("join_room", {id : data.idCateGory})
+                        socket.emit("getCMT", {idBlog : data.idCateGory})
                         dispatch(blogSlice.actions.showMore())
                         dispatch(blogSlice.actions.infoOnlyPost(data))
                     }}
