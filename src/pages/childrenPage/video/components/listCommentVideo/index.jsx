@@ -5,9 +5,23 @@ import { format } from 'timeago.js'
 import {
     BiDotsHorizontalRounded
 } from "react-icons/bi"
+import {io} from "socket.io-client"
 const cx = classNames.bind(styles)
 
+const socket = io.connect(process.env.REACT_APP_SOCKET)
+
 const LISTCOMMENTVIDEOWATCH = ({data}) => {
+
+    const infoOnlyVideo = ""
+    
+    const handleDeleteComment = () => {
+        const infoPayload = {
+            id : data._id,
+
+        }
+        socket.emit("remove_comment_video", )
+    }
+
   return (
     <div className={cx("wrapper")}>
         <div>
@@ -75,14 +89,16 @@ const LISTCOMMENTVIDEOWATCH = ({data}) => {
                 }>{format(data?.createdAt) || "just now"}</p>
             </div>
         </div>
-        <div className={cx("icon_comment_video")}>
-            <BiDotsHorizontalRounded style={
-                {
-                    width : 20,
-                    height : 20,
-                    rotate : "90deg",
-                }
-            } />
+        <div 
+        onClick={handleDeleteComment}
+        className={cx("icon_comment_video")}>
+                    <BiDotsHorizontalRounded style={
+                        {
+                            width : 20,
+                            height : 20,
+                            rotate : "90deg",
+                        }
+                    } />
         </div>
     </div>
   )

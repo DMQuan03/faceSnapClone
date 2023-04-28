@@ -1,8 +1,13 @@
 import React from 'react'
+import NAVBARMARKETPLACE from './navbar'
+import MARKETPLACECONTENT from './content'
 
 const MARKETPLACE = () => {
   return (
-    <div>MARKETPLACE</div>
+    <div>
+      <NAVBARMARKETPLACE />
+      <MARKETPLACECONTENT />
+    </div>
   )
 }
 
